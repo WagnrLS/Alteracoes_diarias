@@ -1,2 +1,1 @@
-# Gerenciador-Tarefas-Funcional
-Gerenciador feito para automatizar e acabar com papel na rotina empresarial.
+![Sistema Gerenciador de Tarefas 2023-10-07 23-14-46](https://github.com/WagnrLS/Gerenciador-Tarefas-Funcional/assets/59034026/7bf8ff53-7a58-4ae4-9272-4ca1a4902d7a)
