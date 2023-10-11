@@ -89,6 +89,12 @@ def imprimir_tarefas_concluidas():
                 file.write(f"Código Vendedor: {valores[0]}, Código Cliente: {valores[1]}, Razão Social: {valores[2]}, Alteração: {valores[3]}\n")
         messagebox.showinfo("Tarefas Concluídas", f"Tarefas concluídas foram salvas em {file_path}")
 
+def marcar_como_obs():
+    item_selecionado = tarefas_a_fazer.selection()[0]
+    tarefas_a_fazer.item(item_selecionado, tags=("obs",))
+    tarefas_a_fazer.tag_configure("obs", background="green")
+
+
 # Configuração da janela principal
 root = tk.Tk()
 root.title("Sistema Gerenciador de Tarefas")
@@ -154,13 +160,25 @@ concluir_botao.grid(row=5, column=0, padx=10, pady=10, sticky='ew')
 voltar_botao = tk.Button(root, text="Voltar Tarefa", command=voltar_tarefa)
 voltar_botao.grid(row=5, column=1, padx=10, pady=5, sticky="ew")
 
+# Botão para OBS
+obs_botao = tk.Button(root, text="!", command=marcar_como_obs)
+obs_botao.grid(row=6, column=0, padx=10, pady=10, sticky='ew')
+
 # Botão para imprimir tarefas concluídas (no rodapé)
 imprimir_botao = tk.Button(root, text="Imprimir Tarefas Concluídas", command=imprimir_tarefas_concluidas)
-imprimir_botao.grid(row=6, columnspan=2, padx=10, pady=10, sticky="ew")
+imprimir_botao.grid(row=6, column=1, padx=10, pady=10, sticky="ew")
 
 # Configuração das colunas e linhas para expansão
 root.grid_rowconfigure(4, weight=1)
 root.grid_columnconfigure(0, weight=1)
 root.grid_columnconfigure(1, weight=1)
+
+def exibir_tarefa(event):
+    item_selecionado = tarefas_a_fazer.selection()[0]
+    valores_tarefa = tarefas_a_fazer.item(item_selecionado, "values")
+    mensagem = f"Código Vendedor: {valores_tarefa[0]}\nCódigo Cliente: {valores_tarefa[1]}\nRazão Social: {valores_tarefa[2]}\nAlteração: {valores_tarefa[3]}"
+    messagebox.showinfo("Detalhes da Tarefa", mensagem)
+
+tarefas_a_fazer.bind("<Double-1>", exibir_tarefa)
 
 root.mainloop()
